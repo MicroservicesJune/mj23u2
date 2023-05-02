@@ -51,7 +51,7 @@ git clone https://jihulab.com/f5will/microservices-june-2023-auth
 2.签发一个测试的JWT，可以使用以下网站来生成JWT：
 [https://tooltt.com/jwt-encode/](https://tooltt.com/jwt-encode/)
 
-图片
+![生成JWT](https://jihulab.com/f5will/microservices-june-2023-auth/-/blob/main/pic/jwt.png)
 
 请注意其中的Subject字段，**必须**使用自己的名字，这会作为我们验证实验完成情况的依据！
 
