@@ -45,7 +45,7 @@
 ```bash
 mkdir ~/microservices-june
 cd ~/microservices-june
-git clone https://jihulab.com/f5will/microservices-june-2023-auth
+git clone https://jihulab.com/f5will/microservices-june-2023-auth.git
 ```
 
 2.签发一个测试的JWT，可以使用以下网站来生成JWT：
