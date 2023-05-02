@@ -1,6 +1,6 @@
 # Unit 2实验教程：如何安全地管理容器中的Secrets
 
-## 教程概述~~~~
+## 教程概述
 
 在本教程中，我们将展示当客户端容器访问服务时如何安全地分发和使用JSON Web Token（JWT）。在本教程的四个挑战中，您将尝试使用四种不同的Secrets管理方法，以学习如何在容器中正确地管理Secrets，并了解几种不完善的Secrets管理方法：在本教程中，我们将展示当客户端容器访问服务时如何安全地分发和使用JSON Web Token（JWT）如何安全地分发和使用客户端容器用于访问服务的 JSON Web 令牌 (JWT)。在本教程的四个挑战中，您将尝试使用四种不同的Secrets密钥管理方法，以学习如何在容器中正确地管理Secrets密钥，并了解几种不完善的Secrets密钥管理方法：
 
@@ -445,13 +445,17 @@ if os.path.isfile(jotfile):
 ```
 
 这里我们要确保jwt文件只有一行，所以我们需要删除隐藏在行尾的换行符。您可以使用以下这个命令：
+
 ```bash
 echo -n $(cat token1.jwt) > token1.jwt
 ```
+
 最好cat一下确保没有换行符。
+
 ```bash
 cat token1.jwt
 ```
+
 我们将如何创建这个Secret呢？答案就在 docker-compose.secrets.yml 文件中。
 
 3.检查 Docker Compose 文件，其中Secret文件在secrets部分中进行定义，然后被 apiclient 服务引用：
