@@ -58,7 +58,8 @@ git clone https://jihulab.com/f5will/microservices-june-2023-auth.git
 将生成的Token保存至以下目录并命名为*token1.jwt*
 
 ```bash
-cat ~/microservices-june/microservices-june-2023-auth/apiclient/token1.jwt "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InNpZ24ifQ.eyJpYXQiOjE2Nz UyMDA4MTMsImlzcyI6ImFwaUtleTEiLCJhdWQiOiJhcGlTZXJ2aWNlIiwic3ViIjoiYXBpS2V5MSJ9._6L_Ff29p9AWHLLZ-jEZdihy-H1glooSq_z162VKghA"
+cat ~/microservices-june/microservices-june-2023-auth/apiclient/token1.jwt
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InNpZ24ifQ.eyJpYXQiOjE2Nz UyMDA4MTMsImlzcyI6ImFwaUtleTEiLCJhdWQiOiJhcGlTZXJ2aWNlIiwic3ViIjoiYXBpS2V5MSJ9._6L_Ff29p9AWHLLZ-jEZdihy-H1glooSq_z162VKghA"
 ```
 
 虽然可通过多种方法使用该令牌进行身份验证，但在本教程中，API 客户端应用使用OAuth 2.0 Bearer令牌授权框架将其传递给身份验证服务器。这需要您在 JWT 前面加上 *Authorization: Bearer* 前缀，如本例所示：
@@ -72,7 +73,7 @@ cat ~/microservices-june/microservices-june-2023-auth/apiclient/token1.jwt "eyJh
 1.切换到身份验证服务器目录：
 
 ```bash
-cd apiserver
+cd ~/microservices-june/microservices-june-2023-auth/apiserver
 ```
 
 2.构建身份验证服务器的 Docker 镜像（注意最后的句号）：
@@ -216,17 +217,17 @@ apiclient-apiclient-1 exited with code 0
 1.创建提取目录并转到该目录：
 
 ```bash
-mkdir extract
-cd extract
+mkdir ~/extract
+cd ~/extract
 ```
 
 2.列出有关容器镜像的基本信息。--format 标记提高了输出结果的可读性（出于同样的原因，输出结果分成了两行）：
 
 ```bash
-   docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.RunningFor}}\t{{.Status}}"
-   CONTAINER ID   NAMES                   IMAGE       ...
-   11b73106fdf8   apiclient-apiclient-1   apiclient   ...
-   ad9bdc05b07c   exciting_clarke         apiserver   ...
+docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.RunningFor}}\t{{.Status}}"
+CONTAINER ID   NAMES                   IMAGE       ...
+11b73106fdf8   apiclient-apiclient-1   apiclient   ...
+ad9bdc05b07c   exciting_clarke         apiserver   ...
 
     ... CREATED          STATUS
     ... 6 minutes ago    Exited (0) 4 minutes ago
@@ -453,7 +454,8 @@ echo -n $(cat token1.jwt) > token1.jwt
 最好cat一下确保没有换行符。
 
 ```bash
-cat token1.jwt
+root@auth:~/microservices-june/microservices-june-2023-auth/apiclient # cat token1.jwt
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjpbeyJ0b29sdHQiOiJodHRwczovL3Rvb2x0dC5jb20ifV0sImlhdCI6MTY4MzAyMTAxOSwiZXhwIjoxNzE0NTc5MTk5LCJhdWQiOiIiLCJpc3MiOiJOR0lOWCIsInN1YiI6Ind0YW5nIn0.3v0plqdGVcppD6WCEOFV2o_IOygzbOR-soqKbK07l3Aroot@auth:~/microservices-june/microservices-june-2023-auth/apiclient #
 ```
 
 我们将如何创建这个Secret呢？答案就在 docker-compose.secrets.yml 文件中。
@@ -514,7 +516,7 @@ docker inspect <container_ID>
 4.切换到提取目录（您在挑战 1 中创建的），并将容器导出到 tar 归档文件：
 
 ```bash
-cd extract
+cd ~/extract
 docker export -o api2.tar <container_ID>
 ```
 
@@ -704,8 +706,8 @@ docker logs -f <container_ID>
 从挑战 3 中我们还知道，/run/secrets/jot 文件为空，但您可以检查：
 
 ```bash
-cd extract
-docker export -o api3.tar 
+cd ~/extract
+docker export -o api3.tar <container_ID>
 tar --extract --file=api3.tar run/secrets/jot
 cat run/secrets/jot
 ```
@@ -742,6 +744,7 @@ docker service rm secretstack_apiclient
 
 ```bash
 docker secret rm jot
+cd ~/microservices-june/microservices-june-2023-auth/apiclient
 docker secret create jot ./token2.jwt
 ```
 
