@@ -59,7 +59,7 @@ git clone https://jihulab.com/f5will/microservices-june-2023-auth.git
 
 ```bash
 cat ~/microservices-june/microservices-june-2023-auth/apiclient/token1.jwt
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InNpZ24ifQ.eyJpYXQiOjE2Nz UyMDA4MTMsImlzcyI6ImFwaUtleTEiLCJhdWQiOiJhcGlTZXJ2aWNlIiwic3ViIjoiYXBpS2V5MSJ9._6L_Ff29p9AWHLLZ-jEZdihy-H1glooSq_z162VKghA"
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjpbeyJ0b29sdHQiOiJodHRwczovL3Rvb2x0dC5jb20ifV0sImlhdCI6MTY4MzAyMTAxOSwiZXhwIjoxNzE0NTc5MTk5LCJhdWQiOiIiLCJpc3MiOiJOR0lOWCIsInN1YiI6Ind0YW5nIn0.3v0plqdGVcppD6WCEOFV2o_IOygzbOR-soqKbK07l3A
 ```
 
 虽然可通过多种方法使用该令牌进行身份验证，但在本教程中，API 客户端应用使用OAuth 2.0 Bearer令牌授权框架将其传递给身份验证服务器。这需要您在 JWT 前面加上 *Authorization: Bearer* 前缀，如本例所示：
